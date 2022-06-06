@@ -1,0 +1,15 @@
+﻿@page "{id:Guid}"
+@model UnitDirectory.Pages.CreateUnitModel
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+
+<h2>Add a child unit</h2>
+<form method="post">
+    <input name="id" value="@Model.Data.ParentId" type="hidden" />
+    <p><label>Name</label><br />
+        <input name="name" />
+    </p>
+    <input type="submit" value="Отправить" />
+</form>

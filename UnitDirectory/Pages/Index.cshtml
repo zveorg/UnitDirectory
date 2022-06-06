@@ -1,0 +1,46 @@
+﻿@page
+@model UnitDirectory.Pages.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+        <form method="post">
+            <button type="submit" class="btn btn-link" asp-page-handler="refresh">
+                Refresh
+            </button>  
+            <button type="submit" class="btn btn-link" asp-page-handler="export">
+                Export XML
+            </button>
+        </form>
+    </header>
+  </div>
+
+<main class="container">
+  <div class="bg-light p-5 rounded">
+    <ul class="list-group list-group-flush">
+        @foreach (var unit in Model.Units)
+        {
+            <li class="list-group-item" style="padding-left:@(unit.Level * 50)px">
+
+                <div class="fw-bold">@($"{unit.Name} {unit.Index}")</div>
+                <form method="post">
+                    <a  class="btn btn-link" asp-page="CreateUnit" asp-route-id="@unit.Id">Add New Child</a>
+                    @if(unit.ParentId is not null)
+                    {
+                        <a class="btn btn-link"  asp-page="MoveUnit" asp-route-id="@unit.Id">MoveUnit</a>
+
+                        <button type="submit" class="btn btn-link" asp-page-handler="delete" asp-route-id="@unit.Id">
+                            Delete
+                        </button>                            
+                    }
+                </form>
+            </li>
+        }
+    </ul>
+
+
+  </div>
+</main>

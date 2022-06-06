@@ -1,0 +1,29 @@
+﻿@page
+@model UnitDirectory.Pages.MoveUnitModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<main class="container">
+  <div class="bg-light p-5 rounded">
+    <ul class="list-group list-group-flush">
+        <form method="post">
+            <input name="id" value="@Model.Id" type="hidden" />
+            @foreach (var unit in Model.Units)
+            {
+                <li class="list-group-item" style="padding-left:@(unit.Level * 50)px">
+
+                    <div class="fw-bold">@($"{unit.Name} {unit.Index}")</div>
+
+                    <button class="btn btn-link" type="submit"  asp-page-handler="patch" asp-route-parentId="@unit.Id">
+                        Move Here
+                    </button>                         
+                </li>
+            }
+        </form>
+    </ul>
+
+
+  </div>
+</main>
